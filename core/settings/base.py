@@ -1,20 +1,24 @@
 from pathlib import Path
-# from dotenv import load_dotenv
-# import os
-# import dj_database_url  # for render deployment
-
+import os
+from dotenv import load_dotenv
+import random
+import string
 
 # Load environment variables from .env file
-#load_dotenv()
+load_dotenv()
+
+# Generate a random secret key if not provided
+SECRET_KEY = os.environ.get("SECRET_KEY") or "".join(
+    random.SystemRandom().choice(string.ascii_letters + string.digits)
+    for _ in range(50)
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
@@ -46,14 +50,14 @@ MIDDLEWARE = [
 ]
 
 # more security settings:
-# if not DEBUG:
-# CSRF_COOKIE_SECURE = True  # Use this in production
-# SESSION_COOKIE_SECURE = True  # Use secure cookies for sessions
-# Enable HTTP Strict Transport Security (HSTS)
-# SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
-# SECURE_HSTS_PRELOAD = True  # Allow your site to be preloaded by browsers
-#   SECURE_CONTENT_TYPE_NOSNIFF = True
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True  # Use this in production
+    SESSION_COOKIE_SECURE = True  # Use secure cookies for sessions
+
+    SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+    SECURE_HSTS_PRELOAD = True  # Allow your site to be preloaded by browsers
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 ROOT_URLCONF = "core.urls"
 
@@ -85,23 +89,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-# if os.environ.get("DATABASE_URL"):
-#     # Use PostgreSQL on Render
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default=os.environ.get("DATABASE_URL"),
-#             conn_max_age=600,  # Keep database connections open for 10 minutes
-#         )
-#     }
-# else:
-# Use SQLite locally
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 
 # Password validation
