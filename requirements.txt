@@ -4,12 +4,11 @@ click==8.1.8
 colorama==0.4.6
 dj-database-url==2.3.0
 Django==5.2
-gunicorn
 h11==0.14.0
-mysqlclient
 packaging==24.2
 pillow==11.1.0
+python-dotenv==1.1.0
 sqlparse==0.5.3
 typing_extensions==4.13.2
 tzdata==2025.2
-whitenoise
+whitenoise==6.9.0

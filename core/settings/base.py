@@ -1,24 +1,22 @@
 from pathlib import Path
-import os
+
 from dotenv import load_dotenv
-import random
-import string
+import os
+
+# import dj_database_url  # for render deployment
+
 
 # Load environment variables from .env file
 load_dotenv()
-
-# Generate a random secret key if not provided
-SECRET_KEY = os.environ.get("SECRET_KEY") or "".join(
-    random.SystemRandom().choice(string.ascii_letters + string.digits)
-    for _ in range(50)
-)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
@@ -46,18 +44,18 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    #"whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 # more security settings:
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True  # Use this in production
-    SESSION_COOKIE_SECURE = True  # Use secure cookies for sessions
-
-    SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
-    SECURE_HSTS_PRELOAD = True  # Allow your site to be preloaded by browsers
-    SECURE_CONTENT_TYPE_NOSNIFF = True
+# if not DEBUG:
+# CSRF_COOKIE_SECURE = True  # Use this in production
+# SESSION_COOKIE_SECURE = True  # Use secure cookies for sessions
+# Enable HTTP Strict Transport Security (HSTS)
+# SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+# SECURE_HSTS_PRELOAD = True  # Allow your site to be preloaded by browsers
+# ECURE_CONTENT_TYPE_NOSNIFF = True
 
 ROOT_URLCONF = "core.urls"
 
@@ -78,6 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+# WSGI_APPLICATION = "in-2025-i-raced-python-anywhere.core.wsgi.application"
 
 
 # Database
