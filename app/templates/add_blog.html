@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<body class="blog">
+	<div id="page">
+		<div class="container">
+			<!-- #masthead -->
+			<div id="content" class="site-content">
+				<div id="primary" class="content-area column two-thirds">
+					<main id="main" class="site-main" role="main">
+						
+
+
+							<form method="post" enctype="multipart/form-data">
+								{% csrf_token %}
+								<div class="form-group m-3">
+									<label for="title" class="form-label">Title</label>
+									<input type="text" name="title" id="title" placeholder="Enter blog title" required class="form-control">
+								</div>
+							
+								<div class="form-group m-3">
+									<label for="content" class="form-label">Content</label>
+									<textarea name="content" id="content" rows="10" class="form-control"></textarea>
+								</div>
+							
+								<div class="form-group m-3">
+									<label for="image" class="form-label">Upload Image</label>
+									<input type="file" name="image" id="image" class="form-control-file">
+								</div>
+							
+								{% comment %} <div class="form-group m-3">
+									<label for="category" class="form-label">Select a Category</label>
+									<select name="category" id="category" class="form-control">
+										<option value="none">None</option>
+										{% for cat in category %}
+											<option value="{{ cat.id }}">{{ cat.month }} - {{ cat.venue }}</option>
+										{% endfor %}
+									</select>
+								</div> {% endcomment %}
+							
+								<button type="submit" class="btn btn-primary" style = " background-color:black; color:white;">Submit</button>
+							</form>
+							
+							
+
+						
+					</main>
+				</div>			
+			</div>		
+		</div>		
+	</div>			
+
+	{% endblock %}					
+	
+	<script>
+		// Initialize CKEditor for the content textarea
+		CKEDITOR.replace('content');
+		height: 300,  // Set the height of the editor
+        width: '100%'  // Ensure it takes the full width of the container
+	</script>
+	<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+
+</body>
+
+
+
