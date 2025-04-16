@@ -3,8 +3,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# import dj_database_url  # for render deployment
-
 
 # Load environment variables from .env file
 load_dotenv()
