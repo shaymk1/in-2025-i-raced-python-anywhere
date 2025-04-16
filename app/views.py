@@ -1,6 +1,3 @@
-# from re import A
-from calendar import c
-import re
 from django.shortcuts import render, redirect
 from .models import Photo, Category, About, Blog
 from django.core.paginator import Paginator
